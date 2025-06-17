@@ -1,0 +1,49 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Добавить подписку</h5>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+        <!-- Поля формы остаются без изменений -->
+        <div class="mb-3">
+          <label class="form-label">Название сервиса</label>
+          <input type="text" class="form-control" formControlName="serviceName" required>
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Дата начала</label>
+          <input type="date" class="form-control" formControlName="startDate" required>
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Дата окончания</label>
+          <input type="date" class="form-control" formControlName="endDate" required>
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Стоимость</label>
+          <input type="number" class="form-control" formControlName="cost" required>
+        </div>
+        
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" formControlName="reminderEnabled" 
+                (change)="toggleEmailField()">
+          <label class="form-check-label">Получать уведомления</label>
+        </div>
+        
+        <div class="mb-3" *ngIf="showEmailField">
+          <label class="form-label">Email для уведомлений</label>
+          <input type="email" class="form-control" formControlName="userEmail">
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Отмена</button>
+          <button type="submit" class="btn btn-primary" [disabled]="subscriptionForm.invalid">
+            Сохранить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
