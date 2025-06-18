@@ -6,40 +6,43 @@
     <div class="modal-body">
       <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label class="form-label">Название сервиса</label>
+          <label class="form-label">Service name</label>
           <input type="text" class="form-control" formControlName="serviceName" required>
         </div>
         
         <div class="mb-3">
-          <label class="form-label">Дата начала</label>
+          <label class="form-label">Start date</label>
           <input type="date" class="form-control" formControlName="startDate" required>
         </div>
         
         <div class="mb-3">
-          <label class="form-label">Дата окончания</label>
+          <label class="form-label">End date</label>
           <input type="date" class="form-control" formControlName="endDate" required>
+          <div *ngIf="dateRangeError" class="text-danger small mt-1">
+            End date must be after start date
+          </div>
         </div>
         
         <div class="mb-3">
-          <label class="form-label">Стоимость</label>
+          <label class="form-label">Cost</label>
           <input type="number" class="form-control" formControlName="cost" required>
         </div>
         
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" formControlName="reminderEnabled" 
                 (change)="toggleEmailField()">
-          <label class="form-check-label">Получать уведомления</label>
+          <label class="form-check-label">Receive notifications</label>
         </div>
         
         <div class="mb-3" *ngIf="showEmailField">
-          <label class="form-label">Email для уведомлений</label>
+          <label class="form-label">Email for notifications</label>
           <input type="email" class="form-control" formControlName="userEmail">
         </div>
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="onCancel()">Отмена</button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
           <button type="submit" class="btn btn-primary" [disabled]="subscriptionForm.invalid">
-            Сохранить
+            Save
           </button>
         </div>
       </form>

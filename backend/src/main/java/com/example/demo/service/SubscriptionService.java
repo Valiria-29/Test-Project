@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubscriptionService {
@@ -15,7 +16,7 @@ public class SubscriptionService {
     @Autowired
     SubscriptionRepository subscriptionRep;
 
-    public Subscription save (Subscription subscription) {
+    public Subscription save(Subscription subscription) {
         return  subscriptionRep.save(subscription);
     }
 
@@ -23,9 +24,13 @@ public class SubscriptionService {
         return subscriptionRep.findAll();
     }
 
-    public Subscription getOne(Long id) throws SubscriptionNotFoundException {
-        return subscriptionRep.findById(id)
-                .orElseThrow(() -> new SubscriptionNotFoundException("Подписка не найдена"));
+    public Optional<Subscription> getOne(Long id) {
+        return subscriptionRep.findById(id);
+    }
+
+
+    public boolean existsById(Long id) {
+        return subscriptionRep.existsById(id);
     }
 
     public void deleteById(Long id) {
@@ -36,11 +41,10 @@ public class SubscriptionService {
         LocalDate now = LocalDate.now();
         LocalDate in7Days = now.plusDays(7);
 
-        return subscriptionRep.findUpcomingSubscriptions(now, in7Days);
+        return subscriptionRep.findActiveReminderSubscriptionsBetweenDates(now, in7Days);
     }
 
     public List<Subscription> findSubscriptionsForUserEmail(String userEmail) {
-        return subscriptionRep.findByUserEmailAndReminderEnabledTrue(userEmail);
+        return subscriptionRep.findActiveReminderSubscriptionsByUser(userEmail);
     }
-
 }

@@ -1,47 +1,47 @@
-.listHeader{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    background-color: #e9eef6;
+.listHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  background-color: #e9eef6;
 }
-.listHeader h2{
-    font-size: 28px;
-    margin: 20px auto 15px auto;
+.listHeader h2 {
+  font-size: 28px;
+  margin: 20px auto 15px auto;
 }
-.listHeader button{
-    font-size: 14px;
-    padding: 6px 12px;
-    box-sizing: border-box;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+.listHeader button {
+  font-size: 14px;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
 }
-.listHeader button:hover{
+.listHeader button:hover {
   box-shadow: 0 0 5px #007bff;
 }
 
-.cardItem{
-    display: flex;
-    flex-direction: column;
-    padding: 10px 30px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0px 0px 60px 5px rgba(0, 0, 0, 0.09);
-    box-sizing: border-box;
-    margin: 30px 20px;
+.cardItem {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 0px 60px 5px rgba(0, 0, 0, 0.09);
+  box-sizing: border-box;
+  margin: 30px 20px;
 }
-.cardBody{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.cardBody {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-h3{
-    font-size: 20px;
-    margin: 0px;
+h3 {
+  font-size: 20px;
+  margin: 0px;
 }
 
 .btn {
@@ -51,26 +51,26 @@ h3{
   border: 1px solid transparent;
   border-radius: 4px;
 }
-.btn-edit{
+.btn-edit {
   color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
-    margin-right: 15px
+  background-color: #6c757d;
+  border-color: #6c757d;
+  margin-right: 15px
 }
-.btn-edit:hover{
+.btn-edit:hover {
   box-shadow: 0 0 5px #6c757d;
 }
 
-.btn-delete{
+.btn-delete {
   color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
-.btn-delete:hover{
+.btn-delete:hover {
   box-shadow: 0 0 5px #dc3545;
 }
 
-.SubList{
+.subList {
   width: 100%;
   max-width: 900px;
   margin: 0 auto; 
@@ -83,12 +83,12 @@ h3{
   padding: 20px;
   color: #666;
 }
+
 .modal-container {
   position: relative;
   z-index: 1; 
-  
 }
-/* Стили для модального окна редактирования */
+
 .modal-dialog {
   position: fixed;
   top: 50%;
@@ -181,7 +181,6 @@ h3{
   color: white;
 }
 
-/* Адаптивность */
 @media (max-width: 500px) {
   .modal-dialog {
     min-width: 90%;

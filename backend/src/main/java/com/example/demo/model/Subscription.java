@@ -5,7 +5,6 @@ import jdk.jfr.DataAmount;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
 @Entity
 @Table(name = "subscription", schema = "public")
 public class Subscription {
@@ -51,7 +50,7 @@ public class Subscription {
         this.id = id;
     }
 
-    public  String getServiceName(){
+    public String getServiceName(){
         return  serviceName;
     }
 
@@ -98,6 +97,4 @@ public class Subscription {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-
-
 }

@@ -4,7 +4,6 @@ import com.example.demo.model.Subscription;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.SubscriptionService;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j  // Эта аннотация автоматически добавляет логгер
+@Slf4j  
 @Service
 public class ScheduledEmailService {
 
@@ -36,12 +35,10 @@ public class ScheduledEmailService {
         log.info("=== Начало выполнения scheduled задачи ===");
 
         try {
-            // 1. Получаем даты
             LocalDate now = LocalDate.now();
             LocalDate in7Days = now.plusDays(7);
             log.info("Поиск подписок, заканчивающихся с {} по {}", now, in7Days);
 
-            // 2. Ищем подписки
             List<Subscription> subscriptions = subscriptionService.findUpcomingSubscriptions();
             log.info("Найдено подписок: {}", subscriptions.size());
 
@@ -50,7 +47,6 @@ public class ScheduledEmailService {
                 return;
             }
 
-            // 3. Логируем найденные подписки
             subscriptions.forEach(sub ->
                     log.debug("Подписка: {} (ID: {}), окончание: {}, email: {}",
                             sub.getServiceName(),
@@ -59,24 +55,21 @@ public class ScheduledEmailService {
                             sub.getUserEmail())
             );
 
-            // 4. Группируем по email
             Map<String, List<Subscription>> byEmail = subscriptions.stream()
                     .filter(sub -> sub.getUserEmail() != null && !sub.getUserEmail().isEmpty())
                     .collect(Collectors.groupingBy(Subscription::getUserEmail));
 
             log.info("Уникальных email для отправки: {}", byEmail.size());
 
-            // 5. Отправляем письма
             byEmail.forEach((email, subs) -> {
                 try {
                     log.info("Отправка уведомления на: {}", email);
                     emailService.sendSubscriptionNotification(email, subs);
                     log.info("Уведомление успешно отправлено на: {}", email);
                 } catch (Exception e) {
-                    log.error("Ошибка при отправке на {}: {}", email, e.getMessage());
+                    log.error("Ошибка при отправке на " + email, e); 
                 }
             });
-
         } catch (Exception e) {
             log.error("КРИТИЧЕСКАЯ ОШИБКА в scheduled задаче: ", e);
         } finally {

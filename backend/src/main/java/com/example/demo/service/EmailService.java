@@ -22,7 +22,6 @@ public class EmailService implements EmailServiceInt{
     private final JavaMailSender mailSender;
     private  final TemplateEngine templateEngine;
 
-
     public EmailService(JavaMailSender mailSender, TemplateEngine templateEngine) {
         this.mailSender = mailSender;
         this.templateEngine = templateEngine;

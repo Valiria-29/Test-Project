@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,AbstractControl  } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+function dateRangeValidator(control: AbstractControl): {[key: string]: boolean} | null {
+  const startDate = control.get('startDate')?.value;
+  const endDate = control.get('endDate')?.value;
+  
+  if (startDate && endDate && new Date(endDate) <= new Date(startDate)) {
+    return { 'dateRange': true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-add-subscription-modal',
@@ -11,7 +21,7 @@ export class AddSubscriptionModalComponent {
   subscriptionForm: FormGroup;
   showEmailField = false;
 
-  constructor(
+    constructor(
     private fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
@@ -22,7 +32,7 @@ export class AddSubscriptionModalComponent {
       cost: [0, [Validators.required, Validators.min(0)]],
       reminderEnabled: [false],
       userEmail: ['']
-    });
+    }, { validators: dateRangeValidator }); 
   }
 
   toggleEmailField() {
@@ -45,5 +55,8 @@ export class AddSubscriptionModalComponent {
 
   onCancel() {
     this.activeModal.dismiss();
+  }
+  get dateRangeError(): boolean {
+    return this.subscriptionForm.hasError('dateRange');
   }
 }
