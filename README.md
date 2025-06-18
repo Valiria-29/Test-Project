@@ -37,3 +37,6 @@
    npm start  
 
 Приложение доступно по адресу: http://localhost:4200
+
+Для проверки работы оповещения через email рассылку измените значение subscription.reminder.cron в backend/src/resources/application.properties на подходящее время.  
+Оповещение придет на адрес, указанный при создании подписки.
