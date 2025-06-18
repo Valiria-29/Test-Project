@@ -17,14 +17,23 @@
    spring.datasource.password=password  
    spring.jpa.hibernate.ddl-auto=update  
 
-## Backend
-Соберите и запустите:  
-  cd backend  
-  mvn clean install  
-  mvn spring-boot:run  
-## Frontend
+## 2. Backend
+### Установка компонентов
+   winget install -e --id Oracle.JDK.17  
+   winget install -e --id PostgreSQL.PostgreSQL  
+   winget install -e --id Git.Git  
+   winget install -e --id Node.js  
+   winget install -e --id Apache.Maven  
+### Первый запуск
+   cd backend  
+   mvn lombok:install  
+   mvn clean install  
+   mvn spring-boot:run   
+## 3. Frontend
 Запустите фронтенд:  
    cd frontend/frontend-app  
+   npm install --force  
+   npm install -g @angular/cli  
    npm start  
 
 Приложение доступно по адресу: http://localhost:4200
