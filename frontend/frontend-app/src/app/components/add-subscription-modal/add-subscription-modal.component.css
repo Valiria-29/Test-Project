@@ -1,30 +1,106 @@
+.modal-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050;
+  width: auto; 
+  max-width: 90%; 
+  min-width: 400px; 
+  margin: 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: white;
+}
+
 .modal-content {
-  padding: 20px;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.modal-footer {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Стили для формы */
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-bottom: 5px;
 }
 
 .form-check {
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
 }
-.modal-dialog {
-  position: relative;
-  z-index: 100;
-  margin: 20px 0;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 5px;
+
+.form-check-input {
+  margin-right: 10px;
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* Анимация появления */
-.custom-modal {
-  animation: fadeIn 0.3s ease-out;
+.btn-secondary {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+.btn-primary {
+  background: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+}
+
+.btn-primary:disabled {
+  background: #b3d7ff;
+  border-color: #b3d7ff;
+  cursor: not-allowed;
+}
+
+/* Адаптивность */
+@media (max-width: 500px) {
+  .modal-dialog {
+    min-width: 90%;
+    padding: 15px;
+  }
 }

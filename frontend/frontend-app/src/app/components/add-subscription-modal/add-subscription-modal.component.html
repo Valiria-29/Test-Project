@@ -1,11 +1,10 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Добавить подписку</h5>
+      <h5 class="modal-title">Add new subscription</h5>
     </div>
     <div class="modal-body">
       <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
-        <!-- Поля формы остаются без изменений -->
         <div class="mb-3">
           <label class="form-label">Название сервиса</label>
           <input type="text" class="form-control" formControlName="serviceName" required>

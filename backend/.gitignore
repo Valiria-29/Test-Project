@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+echo "target/
+*.jar
+*.war
+*.ear
+*.iml
+.idea/
+.settings/
+.classpath
+.project" >> .gitignore

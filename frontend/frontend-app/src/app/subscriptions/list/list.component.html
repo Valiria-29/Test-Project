@@ -1,77 +1,85 @@
 <div class="subscription-list">
-  <h2>Мои подписки</h2>
-  
-  <div class="modal-container">
-    <button class="btn btn-primary" (click)="openAddSubscriptionModal()">
-      + Добавить подписку
-    </button>
+  <div class="listHeader">
+    <h2>My subscriptions</h2>
+    <div class="modal-container">
+      <button class="btn btn-primary" (click)="openAddSubscriptionModal()">
+        Add new subscription
+      </button>
+    </div>
   </div>
 
   <div *ngIf="subscriptions.length === 0" class="alert alert-info mt-3">
-    У вас пока нет активных подписок
+    You don't have any active subscriptions yet
   </div>
-
+<div class="SubList">
   <div *ngFor="let sub of subscriptions" class="card mt-3">
     <div class="card-body">
       <!-- Режим просмотра -->
-      <div *ngIf="!sub.editing">
-        <h5 class="card-title">{{ sub.serviceName }}</h5>
-        <p class="card-text">
-          <strong>Период:</strong> 
-          {{ sub.startDate | date:'dd.MM.yyyy' }} - {{ sub.endDate | date:'dd.MM.yyyy' }}<br>
-          <strong>Стоимость:</strong> {{ sub.cost | currency:'RUB':'symbol-narrow':'1.2-2' }}<br>
-          <strong>Уведомления:</strong> 
-          <span [class.text-success]="sub.reminderEnabled" 
-                [class.text-muted]="!sub.reminderEnabled">
-            {{ sub.reminderEnabled ? 'Включены' : 'Выключены' }}
-          </span>
-        </p>
-        <div class="d-flex gap-2">
-          <button class="btn btn-primary" (click)="startEditing(sub)">
-            Редактировать
-          </button>
-          <button class="btn btn-danger" (click)="deleteSubscription(sub.id)">
-            Удалить
-          </button>
+      <div *ngIf="!sub.editing" class="cardItem">
+        <h3 class="card-title">{{ sub.serviceName }}</h3>
+        <div class="cardBody">
+          <p class="card-text">
+            <strong>Период:</strong> 
+            {{ sub.startDate | date:'dd.MM.yyyy' }} - {{ sub.endDate | date:'dd.MM.yyyy' }}<br>
+            <strong>Стоимость:</strong> {{ sub.cost  }}<br>
+            <strong>Уведомления:</strong> 
+            <span [class.text-success]="sub.reminderEnabled" 
+                  [class.text-muted]="!sub.reminderEnabled">
+              {{ sub.reminderEnabled ? 'Включены' : 'Выключены' }}
+            </span>
+          </p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-edit" (click)="startEditing(sub)">
+              Редактировать
+            </button>
+            <button class="btn btn-delete" (click)="deleteSubscription(sub.id)">
+              Удалить
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Режим редактирования -->
-      <form *ngIf="sub.editing" (ngSubmit)="saveSubscription(sub)" class="edit-form">
-        <div class="mb-3">
-          <label class="form-label">Название сервиса</label>
-          <input type="text" class="form-control" [(ngModel)]="sub.serviceName" name="serviceName" required>
+      <div *ngIf="sub.editing" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit subscription</h5>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="saveSubscription(sub)" class="edit-form">
+              <div class="mb-3">
+                <label class="form-label">Название сервиса</label>
+                <input type="text" class="form-control" [(ngModel)]="sub.serviceName" name="serviceName" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Дата начала</label>
+                <input type="date" class="form-control" [(ngModel)]="sub.startDate" name="startDate" required>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Дата окончания</label>
+                <input type="date" class="form-control" [(ngModel)]="sub.endDate" name="endDate" required>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Стоимость</label>
+                <input type="number" class="form-control" [(ngModel)]="sub.cost" name="cost" required>
+              </div>
+              
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="sub.reminderEnabled" name="reminderEnabled"
+                      (change)="sub.reminderEnabled = !sub.reminderEnabled">
+                <label class="form-check-label">Получать уведомления</label>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="cancelEditing(sub)">Отмена</button>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+              </div>
+            </form>
+          </div>
         </div>
-        
-        <div class="mb-3">
-          <label class="form-label">Дата начала</label>
-          <input type="date" class="form-control" [(ngModel)]="sub.startDate" name="startDate" required>
-        </div>
-        
-        <div class="mb-3">
-          <label class="form-label">Дата окончания</label>
-          <input type="date" class="form-control" [(ngModel)]="sub.endDate" name="endDate" required>
-        </div>
-        
-        <div class="mb-3">
-          <label class="form-label">Стоимость</label>
-          <input type="number" class="form-control" [(ngModel)]="sub.cost" name="cost" required>
-        </div>
-        
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="sub.reminderEnabled" name="reminderEnabled">
-          <label class="form-check-label">Получать уведомления</label>
-        </div>
-        
-        <div class="d-flex gap-2">
-          <button type="submit" class="btn btn-success">
-            Сохранить
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="cancelEditing(sub)">
-            Отмена
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
